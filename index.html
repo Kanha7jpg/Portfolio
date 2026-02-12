@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Portfolio showcasing creative developer work">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="navbar">
+        <div class="logo"><a href="#about" class="active">KANHA</a><span class="dot">.</span></div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#tech-stack">Resume</a></li>
+            <li><a href="#work">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="#contact" class="btn-partner">Partner Up!?</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-bg-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="glitch" data-text="Aspiring Engineer">Aspiring Engineer</h1>
+            <p class="subtitle">Building immersive digital experiences with design and code.</p>
+            <div class="cta-group">
+                <a href="#work" class="btn btn-primary">View Projects <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="arrow">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section id="quote" class="section quote">
+        <div class="container">
+            <blockquote class="highlight-quote">
+                “Code is like humor. When you have to explain it, it’s bad.”
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">Who I Am</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Curious and driven, I enjoy exploring new ideas, building meaningful projects, and taking on
+                        challenges that push me to
+                        grow. My journey blends technical learning with hands-on experiences in leadership, teamwork,
+                        and creative problem
+                        solving. I value adaptability, clear communication, and a mindset that sees every opportunity as
+                        a chance to learn and
+                        contribute..</p>
+                    <div class="skills-wrapper" id="tech-stack">
+                        <h3>Tech Stack</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">DSA</span>
+                            <span class="skill-tag">Design</span>
+                            <span class="skill-tag">Finance</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Supply Chain</span>
+                            <span class="skill-tag">Cryptography</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="profile-container">
+                        <img src="photo.jpg" alt="Kanha" class="profile-photo">
+                        <div class="profile-overlay">
+                            <span class="working-label">Currently Working On</span>
+                            <span class="project-name">Healthcare App</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="resume-cta-wrapper" style="text-align: center; margin-bottom: 4rem;">
+        <a href="#" class="btn-resume">
+            <span>Resume</span>
+            <i class="fas fa-file-download"></i>
+        </a>
+    </div>
+
+    <section id="work" class="section work">
+        <div class="container">
+            <h2 class="section-title">Key Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <article class="project-card" style="background: linear-gradient(45deg, #FF6B6B, #556270);" data-tilt>
+                    <div class="project-content">
+                        <h3>Humanoid Robot</h3>
+                        <p>A futuristic Intelligent Outpatient Flow Management.</p>
+                        <a href="https://github.com/Kanha7jpg/MediBot-Orchestrator" class="project-btn">VIEW CODE -></a>
+                        <div class="project-tags">
+                            <span class="tag-box">Computer Vision</span>
+                            <span class="tag-box">ROS</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card" style="background: linear-gradient(45deg, #4ECDC4, #556270);" data-tilt>
+                    <div class="project-content">
+                        <h3>Blockchain-Ledger System</h3>
+                        <p>Immersive shopping experience with 3D product previews.</p>
+                        <a href="#" class="project-btn">VIEW CODE -></a>
+                        <div class="project-tags">
+                            <span class="tag-box">Three.js</span>
+                            <span class="tag-box">Vue</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card" style="background: linear-gradient(45deg, #C7F464, #556270);" data-tilt>
+                    <div class="project-content">
+                        <h3>Personal Expense Tracker</h3>
+                        <p>Real-time chat application with end-to-end encryption.</p>
+                        <a href="#" class="project-btn">VIEW CODE -></a>
+                        <div class="project-tags">
+                            <span class="tag-box">Socket.io</span>
+                            <span class="tag-box">Node</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="view-more-container">
+                <a href="https://github.com/Kanha7jpg?tab=repositories" target="_blank"
+                    class="btn btn-secondary btn-small">
+                    View More Projects <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="contact-subtitle">Have a project in mind? Let's build something amazing together.</p>
+
+            <div class="contact-grid">
+                <a href="https://github.com" target="_blank" class="contact-card">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="contact-card">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="mailto:hello@example.com" class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="contact-card">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://twitter.com" target="_blank" class="contact-card">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </a>
+                <a href="https://discord.com" target="_blank" class="contact-card">
+                    <i class="fab fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Creative Portfolio. Crafted with <i class="fas fa-heart"></i> and Code.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add hover effect for links and buttons
-    const hoverables = document.querySelectorAll('a, button, .project-card');
+    const hoverables = document.querySelectorAll('a, button, .project-card, .resume-highlights');
     hoverables.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursorOutline.classList.add('hovered');
@@ -65,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedTheme) {
         body.setAttribute('data-theme', savedTheme);
         if (savedTheme === 'light') {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        } else {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
         }
@@ -74,13 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (body.getAttribute('data-theme') === 'light') {
             body.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
         } else {
             body.setAttribute('data-theme', 'light');
             localStorage.setItem('theme', 'light');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
         }
     });
 
@@ -137,4 +140,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3000);
         });
     }
+
+    // Resume Modal
+    const resumeBtn = document.getElementById('resume-btn');
+    const resumeModal = document.getElementById('resume-modal');
+    const resumeModalClose = document.getElementById('resume-modal-close');
+
+    if (resumeBtn) {
+        resumeBtn.addEventListener('click', () => {
+            resumeModal.classList.add('active');
+        });
+    }
+
+    if (resumeModalClose) {
+        resumeModalClose.addEventListener('click', () => {
+            resumeModal.classList.remove('active');
+        });
+    }
+
+    // Close modal on outside click
+    if (resumeModal) {
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                resumeModal.classList.remove('active');
+            }
+        });
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            resumeModal.classList.remove('active');
+        }
+    });
 });

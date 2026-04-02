@@ -423,7 +423,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: left;
+    text-align: center;
     min-height: 35vh;
 }
 
@@ -432,6 +432,7 @@ ul {
     max-width: 800px;
     font-size: 1.4rem;
     line-height: 1.7;
+    text-align: center;
     font-family: var(--font-heading);
     color: var(--text-color);
     padding: 1.8rem 2.5rem;
@@ -487,7 +488,7 @@ ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    align-items: center;
+    align-items: start;
 }
 
 .about-text p {
@@ -718,6 +719,47 @@ ul {
     color: var(--text-color);
 }
 
+/* Platform-specific hover colors */
+.contact-card:nth-child(2):hover {
+    border-color: #0077B5;
+}
+
+.contact-card:nth-child(2):hover i {
+    color: #0077B5;
+}
+
+.contact-card:nth-child(3):hover {
+    border-color: #EA4335;
+}
+
+.contact-card:nth-child(3):hover i {
+    color: #EA4335;
+}
+
+.contact-card:nth-child(4):hover {
+    border-color: #E4405F;
+}
+
+.contact-card:nth-child(4):hover i {
+    color: #E4405F;
+}
+
+.contact-card:nth-child(5):hover {
+    border-color: #1DA1F2;
+}
+
+.contact-card:nth-child(5):hover i {
+    color: #1DA1F2;
+}
+
+.contact-card:nth-child(6):hover {
+    border-color: #5865F2;
+}
+
+.contact-card:nth-child(6):hover i {
+    color: #5865F2;
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -932,6 +974,11 @@ footer {
     z-index: 1;
 }
 
+.btn-resume::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
 .btn-resume span {
     position: relative;
     z-index: 2;
@@ -970,7 +1017,64 @@ footer {
     transform: translateY(-2px);
 }
 
-/* Scroll Offset for Tech Stack Link */
+.resume-section {
+    padding-top: 2rem;
+}
+
+.resume-cta-wrapper {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.resume-details-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.resume-highlights {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.12), rgba(3, 218, 198, 0.08));
+    border: 1px solid rgba(108, 99, 255, 0.35);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.resume-highlights:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(108, 99, 255, 0.7);
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.2);
+}
+
+.resume-highlights h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+}
+
+.resume-highlights ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+}
+
+.resume-highlights li {
+    margin-bottom: 0.35rem;
+    line-height: 1.45;
+}
+
+[data-theme="light"] .resume-highlights {
+    background: linear-gradient(135deg, rgba(88, 81, 219, 0.09), rgba(3, 218, 198, 0.07));
+}
+
+/* Scroll Offsets for Internal Links */
+#resume {
+    scroll-margin-top: 100px;
+}
+
 #tech-stack {
     scroll-margin-top: 100px;
 }
@@ -984,4 +1088,94 @@ footer {
 .btn-small {
     padding: 0.6rem 1.5rem;
     font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .resume-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .resume-highlights {
+        padding: 1rem;
+    }
+}
+
+/* Resume Modal */
+.resume-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.resume-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+[data-theme="light"] .resume-modal {
+    background-color: rgba(244, 247, 246, 0.85);
+}
+
+.resume-modal-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    max-width: 900px;
+    max-height: 80vh;
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    animation: modalZoom 0.3s ease;
+}
+
+@keyframes modalZoom {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.resume-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.resume-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 2001;
+}
+
+.resume-modal-close:hover {
+    transform: scale(1.1);
+    background: rgba(108, 99, 255, 0.8);
 }

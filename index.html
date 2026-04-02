@@ -19,19 +19,27 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
+    <!-- Resume Modal -->
+    <div id="resume-modal" class="resume-modal">
+        <div class="resume-modal-content">
+            <button class="resume-modal-close" id="resume-modal-close">&times;</button>
+            <iframe src="resume.pdf" class="resume-iframe"></iframe>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="logo"><a href="#about" class="active">KANHA</a><span class="dot">.</span></div>
         <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#tech-stack">Resume</a></li>
+            <li><a href="#resume">Resume</a></li>
             <li><a href="#work">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-right">
             <a href="#contact" class="btn-partner">Partner Up!?</a>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
-                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
             </button>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -73,9 +81,9 @@
 
     <section id="about" class="section about">
         <div class="container">
-            <h2 class="section-title">Who I Am</h2>
             <div class="about-grid">
                 <div class="about-text">
+                    <h2 class="section-title">Who I Am</h2>
                     <p>Curious and driven, I enjoy exploring new ideas, building meaningful projects, and taking on
                         challenges that push me to
                         grow. My journey blends technical learning with hands-on experiences in leadership, teamwork,
@@ -103,7 +111,7 @@
                         <img src="photo.jpg" alt="Kanha" class="profile-photo">
                         <div class="profile-overlay">
                             <span class="working-label">Currently Working On</span>
-                            <span class="project-name">Healthcare App</span>
+                            <span class="project-name">AI/ML</span>
                         </div>
                     </div>
                 </div>
@@ -111,12 +119,46 @@
         </div>
     </section>
 
-    <div class="resume-cta-wrapper" style="text-align: center; margin-bottom: 4rem;">
-        <a href="#" class="btn-resume">
-            <span>Resume</span>
-            <i class="fas fa-file-download"></i>
-        </a>
-    </div>
+    <section id="resume" class="section resume-section">
+        <div class="container">
+            <div class="resume-cta-wrapper">
+                <button class="btn-resume" id="resume-btn">
+                    <span>Resume</span>
+                    <i class="fas fa-file-download"></i>
+                </button>
+            </div>
+
+            <div class="resume-details-grid" aria-label="Resume Key Sections">
+                <div class="resume-highlights" aria-label="Education">
+                    <h3>Education</h3>
+                    <ul>
+                        <li>Chinmaya International Residential School<br />CBSE, Class of 2023</li>
+                        <li>Amrita Vishwa Vidyapeetham<br />BTech Computer Science, Class of 2027</li>
+                        
+                    </ul>
+                </div>
+
+                <div class="resume-highlights" aria-label="Resume Key Highlights">
+                    <h3>Resume Highlights</h3>
+                    <ul>
+                        <li>Hands-on experience building end-to-end projects.</li>
+                        <li>Strong foundation in problem solving and DSA.</li>
+                        <li>Cross-functional skills in tech, finance, and operations.</li>
+                        <li>Active learner with focus on AI/ML and emerging systems.</li>
+                    </ul>
+                </div>
+
+                <div class="resume-highlights" aria-label="Key Achievements">
+                    <h3>Key Achievements</h3>
+                    <ul>
+                        <li>Participated in multiple national and campus hackathons.</li>
+                        <li>Secured wins and top placements in hackathon challenges.</li>
+                        <li>Built rapid prototypes under tight hackathon deadlines.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="work" class="section work">
         <div class="container">

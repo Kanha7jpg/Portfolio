@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add hover effect for links and buttons
-    const hoverables = document.querySelectorAll('a, button, .project-card');
+    const hoverables = document.querySelectorAll('a, button, .project-card, .resume-highlights');
     hoverables.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursorOutline.classList.add('hovered');

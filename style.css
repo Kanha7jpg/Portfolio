@@ -423,7 +423,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: left;
+    text-align: center;
     min-height: 35vh;
 }
 
@@ -432,6 +432,7 @@ ul {
     max-width: 800px;
     font-size: 1.4rem;
     line-height: 1.7;
+    text-align: center;
     font-family: var(--font-heading);
     color: var(--text-color);
     padding: 1.8rem 2.5rem;
@@ -487,7 +488,7 @@ ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    align-items: center;
+    align-items: start;
 }
 
 .about-text p {
@@ -970,7 +971,64 @@ footer {
     transform: translateY(-2px);
 }
 
-/* Scroll Offset for Tech Stack Link */
+.resume-section {
+    padding-top: 2rem;
+}
+
+.resume-cta-wrapper {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.resume-details-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.resume-highlights {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.12), rgba(3, 218, 198, 0.08));
+    border: 1px solid rgba(108, 99, 255, 0.35);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.resume-highlights:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(108, 99, 255, 0.7);
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.2);
+}
+
+.resume-highlights h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+}
+
+.resume-highlights ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+}
+
+.resume-highlights li {
+    margin-bottom: 0.35rem;
+    line-height: 1.45;
+}
+
+[data-theme="light"] .resume-highlights {
+    background: linear-gradient(135deg, rgba(88, 81, 219, 0.09), rgba(3, 218, 198, 0.07));
+}
+
+/* Scroll Offsets for Internal Links */
+#resume {
+    scroll-margin-top: 100px;
+}
+
 #tech-stack {
     scroll-margin-top: 100px;
 }
@@ -984,4 +1042,14 @@ footer {
 .btn-small {
     padding: 0.6rem 1.5rem;
     font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .resume-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .resume-highlights {
+        padding: 1rem;
+    }
 }

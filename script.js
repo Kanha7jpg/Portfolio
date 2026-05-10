@@ -1,4 +1,139 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('interactive-bg');
+    const ctx = canvas.getContext('2d');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const pointer = {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+        targetX: window.innerWidth / 2,
+        targetY: window.innerHeight / 2,
+        active: false,
+        pulse: 0
+    };
+    let particles = [];
+    let animationFrame;
+
+    const themeColors = () => {
+        const styles = getComputedStyle(document.body);
+        return {
+            primary: styles.getPropertyValue('--primary-color').trim() || '#6C63FF',
+            secondary: styles.getPropertyValue('--secondary-color').trim() || '#03dac6',
+            text: styles.getPropertyValue('--text-color').trim() || '#e0e0e0'
+        };
+    };
+
+    const hexToRgb = (hex) => {
+        const normalized = hex.replace('#', '').trim();
+        if (normalized.length !== 6) return '108, 99, 255';
+        const value = Number.parseInt(normalized, 16);
+        return `${(value >> 16) & 255}, ${(value >> 8) & 255}, ${value & 255}`;
+    };
+
+    const resizeInteractiveBackground = () => {
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = window.innerWidth * pixelRatio;
+        canvas.height = window.innerHeight * pixelRatio;
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+        const particleCount = Math.min(90, Math.max(36, Math.floor((window.innerWidth * window.innerHeight) / 18000)));
+        particles = Array.from({ length: particleCount }, () => ({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
+            radius: Math.random() * 2 + 0.8,
+            orbit: Math.random() * Math.PI * 2
+        }));
+    };
+
+    const drawInteractiveBackground = () => {
+        const { primary, secondary, text } = themeColors();
+        const primaryRgb = hexToRgb(primary);
+        const secondaryRgb = hexToRgb(secondary);
+        pointer.x += (pointer.targetX - pointer.x) * 0.08;
+        pointer.y += (pointer.targetY - pointer.y) * 0.08;
+        pointer.pulse *= 0.94;
+
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        const glow = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 320 + pointer.pulse);
+        glow.addColorStop(0, `rgba(${primaryRgb}, 0.28)`);
+        glow.addColorStop(0.45, `rgba(${secondaryRgb}, 0.12)`);
+        glow.addColorStop(1, 'rgba(10, 10, 10, 0)');
+        ctx.fillStyle = glow;
+        ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+        particles.forEach((particle, index) => {
+            const dx = particle.x - pointer.x;
+            const dy = particle.y - pointer.y;
+            const distance = Math.hypot(dx, dy);
+            const influence = Math.max(0, 1 - distance / 180);
+
+            if (!reducedMotion) {
+                particle.orbit += 0.01;
+                particle.x += particle.vx + Math.cos(particle.orbit) * 0.08 + (dx / Math.max(distance, 1)) * influence * 1.8;
+                particle.y += particle.vy + Math.sin(particle.orbit) * 0.08 + (dy / Math.max(distance, 1)) * influence * 1.8;
+            }
+
+            if (particle.x < -20) particle.x = window.innerWidth + 20;
+            if (particle.x > window.innerWidth + 20) particle.x = -20;
+            if (particle.y < -20) particle.y = window.innerHeight + 20;
+            if (particle.y > window.innerHeight + 20) particle.y = -20;
+
+            for (let next = index + 1; next < particles.length; next++) {
+                const other = particles[next];
+                const linkDistance = Math.hypot(particle.x - other.x, particle.y - other.y);
+                if (linkDistance < 135) {
+                    ctx.strokeStyle = `rgba(${primaryRgb}, ${0.18 * (1 - linkDistance / 135)})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particle.x, particle.y);
+                    ctx.lineTo(other.x, other.y);
+                    ctx.stroke();
+                }
+            }
+
+            const size = particle.radius + influence * 2.8;
+            ctx.fillStyle = index % 3 === 0 ? secondary : index % 2 === 0 ? primary : text;
+            ctx.globalAlpha = 0.35 + influence * 0.45;
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        });
+
+        animationFrame = requestAnimationFrame(drawInteractiveBackground);
+    };
+
+    resizeInteractiveBackground();
+    drawInteractiveBackground();
+
+    window.addEventListener('resize', resizeInteractiveBackground);
+
+    window.addEventListener('pointermove', (e) => {
+        pointer.targetX = e.clientX;
+        pointer.targetY = e.clientY;
+        pointer.active = true;
+        document.documentElement.style.setProperty('--mouse-x', `${(e.clientX / window.innerWidth) * 100}%`);
+        document.documentElement.style.setProperty('--mouse-y', `${(e.clientY / window.innerHeight) * 100}%`);
+    });
+
+    window.addEventListener('pointerdown', (e) => {
+        pointer.targetX = e.clientX;
+        pointer.targetY = e.clientY;
+        pointer.pulse = 160;
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            cancelAnimationFrame(animationFrame);
+        } else {
+            drawInteractiveBackground();
+        }
+    });
+
     // Custom Cursor
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-outline');
